@@ -1,0 +1,47 @@
+Hello workers of the project!!
+
+This folder will contain all of the code needed in the project for making the text adventure game
+
+The structure of the project may change over time but for now the structure will be as such:
+    main.py -> This will hold all of the commands for the game. It will be replaced when moved
+    	       To the Alexa framework.
+    
+    places.py -> This will hold the dictionaries relevant to the locations of the game
+
+    items.py -> This will hold all of the item related dictionaries
+
+    people.py -> This holds the dictionaries related to the npcs of the game
+
+    mechanics.py -> For now, all of the base mechanics of the game will be located here.
+    		    Going forward, any extra functionality should be seperated in an object oriented
+		    way if possible.
+
+If you are wondering why the project is split into multiple files like this, it is because it is much
+easier to maintain with a large group and it is also easier to diagnose errors and add features.
+
+My plan for the game is to make it using many class objects. As seen by some of the older members in
+Software Engineering it is very important to work in this manor and it is better to start this way
+than have to refactor later. For the younger members, this will be a great way for you to learn or
+practice object orientation techniques to better prepare you for the class.
+
+Everything that we have discussed up to this point will be made into issues for members to complete.
+If all of the issues are complete or if you think of something that you would like to add that isn't 
+specified already, you are more than welcome to add to the issues.
+
+The branching style I have chosen to move forward with is as follows:
+    master: WILL ALWAYS BE THE WORKING PROJECT. NEVER PUSH TO MASTER EVER
+    itermed: This will hold the project in its most current state. All subsequent branches will come
+    	     from this branch
+    issue-specific-branches: Each issue should have its own branch from intermed. It is also super
+    			     important that when you create a branch for the issue that you push it
+			     to the repo instantly to create it for others to fetch. This will help
+			     with others not accidentally creating branches with the same name on
+			     their computers. 
+
+However something important to keep in mind is that sometimes we will have to leave out certain
+functionality due to the time constraint of the next three weeks.
+
+Finally, the most important thing to follow is CONSTANT COMMUNICATION. We will all need to be talking
+to each other everytime one of us works on any part of the project. You can communicate directly with
+me, tystgre@bvu.edu or any other member that is relevant but some sort of notice on what you are
+working on must be given to other members so we aren't all working on the same things.

@@ -1,0 +1,63 @@
+Here are some of the most common git commands and practices. If there are some I missed or if you
+think there are more commands than the ones I have listed that are valuable then put them here as well
+BASIC NAVIGATION:
+ls -> This will show you what files are in the current folder you are in
+
+cd FOLDERNAME -> This will put you into the folder that you have specified.
+
+cd .. -> This will take you out of the current folder and put you in the one before it.
+
+git branch -> This alone will tell you which branch you are in and it will list all other current
+	      branches that are known to your computer at the time. THIS DOES NOT MEAN THAT THESE
+	      ARE THE ONLY BRANCHES. A fetch is needed to fully get all of the real current branches.
+
+git branch NEWBRANCHNAME -> This will create a new branch FROM THE BRANCH YOU ARE CURRENTLY IN with
+			    with the name of branchname. IT IS VERY IMPORTANT WHEN CREATING BRANCHES
+			    THAT YOU ARE IN INTERMED AND NOT MASTER or any other small branch.
+
+git checkout BRANCHNAME -> This will switch you from the current branch to the branch you have
+			   specified.
+
+STAYING UP TO DATE:
+git pull origin BRANCHNAME -> This needs to be done everytime you get ready to start working. What it
+			      does is that it gets the current changes made to the branch you are in.
+			      If you don't do this before working, there is a possibility your changes
+			      will not push right. Git can be very tedious in this regard.
+
+git fetch origin -> I do not fully understand this command myself however, when using this command as
+		    stated, it updates my list of branches and allows me to enter branches made and
+		    pushed by others. If you want to look up more about how this command works be
+		    my guest and update this description as you see fit.
+
+MAKING CHANGES:
+git status -> Personally I use this everytime before I commit anything. It shows what files you have
+	      edited.
+
+git add FILENAME -> This adds a file with the name FILENAME to the list to be commited.
+		    I usually don't add by file but instead do "git add .". That command adds all of
+		    the files I have edited to the list to be commited. Saves a lot of time.
+
+git commit -m "a description of the work you just did" -> This commits the changes you have added
+							  and has a message attached that lets others
+							  know what you did
+
+git pull origin BRANCHNAME -> You need to do this before pushing. It is required by git to avoid
+			      complications.
+
+git push origin BRANCHNAME -> This command is what will actually change the branch for evieryone. What
+			      it does is it takes the stuff you have commited and changes the remote
+			      branch on the actual github page to what you have in your folder on your
+			      computer. You need to have the BRANCHNAME match the name of the branch
+			      you are in otherwise it will try and merge branches which isn't good.
+
+GITHUB NOTES:
+On the website itself is where we will be doing the merging of branches using pull requests:
+    When making pull requests you will need to specify the branch you are using and then intermed
+    since all of our changes should be merged to there first. Once the request has been made, it
+    should be reviewed by at least two others. You can set reviewers on the right side while making
+    the request. You can also close issues with pull requests but that has not worked the best in
+    the past so we might have to close them manually.
+
+Creating issues and reviewing the requests of others should be the only other things that we do on
+the website. Both are really easy and can be searched further if you want in depth details. I will
+cover this in the 2/3/21 meeting as well as answer any questions about this moving forward if need be.
