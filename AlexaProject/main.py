@@ -1,1 +1,15 @@
-print("hello world")
+from commandprompt import *
+import Person
+
+person = Person.Person()
+display(person.location)
+
+while True:
+    inp = input("Enter a command: ")
+
+    if inp == "exit":
+        break
+    else:
+        command(inp, person)
+
+print("Goodbye")
