@@ -1,4 +1,4 @@
-import people
+import places
 
 
 def command(commandString, person):
@@ -20,11 +20,11 @@ def command(commandString, person):
 
 
 def goto(place, person):
-    if place in people.connections[person.location]:
+    if place in places.connections[person.location]:
         person.location = place
         display(place)
 
 
 def display(location):
-    print(people.descriptions[location])
-    print(people.connections[location])
+    print(places.descriptions[location])
+    print(places.connections[location])

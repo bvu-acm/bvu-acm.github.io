@@ -1,8 +1,6 @@
 from commandprompt import *
 import Person
 
-print("hello world")
-
 person = Person.Person()
 display(person.location)
 

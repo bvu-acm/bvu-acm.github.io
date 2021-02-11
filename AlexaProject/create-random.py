@@ -26,7 +26,7 @@ for i in range(mainConNumber):
 desc += "}\n"
 cons += "}\n"
 
-f = open("people.py", "w")
+f = open("places.py", "w")
 f.write(desc + "\n")
 f.write(cons + "\n")
 
