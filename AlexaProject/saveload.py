@@ -1,50 +1,53 @@
 import os
 import pathlib
+import Place
+import Person
+
+
 def saveUser(user):
-    # user right now is the name of the user. could later be the person object
+    # user is a person object
     # We will need to continuously add to this as we add more stuff likes items and such
 
-    place = "name"
     try:
         p = os.path.join(os.path.abspath(os.getcwd()), "savefiles")
-        fp = os.path.join(p, user)
+        fp = os.path.join(p, user.name)
         os.mkdir(fp)
-        print("'" + user + "' folder has been created")
+        print("'" + user.name + "' folder has been created")
     except:
         print("The save folder already exists")
 
     s = pathlib.Path.cwd()
     b = os.path.join(s, "savefiles")
-    t = os.path.join(b, user)
-    fp = os.path.join(t, user + ".txt")
+    t = os.path.join(b, user.name)
+    fp = os.path.join(t, user.name + ".txt")
 
     check = True
     try:
         f = open(fp, "r")
-        # This is just in case the function messes something up
         rl = f.readlines()
         f.close()
 
-        fp2 = os.path.join(t, user + "backup.txt")
+        fp2 = os.path.join(t, user.name + "backup.txt")
         f = open(fp2, "w")
         for item in rl:
-            f.write(item + "\n")
+            f.write(item)
         f.close()
     except:
         print("This is the first time saving")
         check = False
 
-
     f = open(fp, "w")
-    f.write(user + "\n")
-    f.write(place + "\n")
+    f.write(user.name + "\n")
+    f.write(user.location.name + "\n")
     f.close()
     if check:
         print("Re-writing the save")
 
-    savePlace(user, place)
+    savePlace(user, user.location)
+
+
 def loadUser(username):
-    user = None
+    user = Person.Person()
     s = pathlib.Path.cwd()
     b = os.path.join(s, "savefiles")
     t = os.path.join(b, username)
@@ -52,47 +55,39 @@ def loadUser(username):
 
     try:
         f = open(fp, "r")
-        # This is just in case the function messes something up
         rl = f.readlines()
         f.close()
 
-        # add user. to name only
-        name = rl[0].rstrip()
-        place = rl[1].rstrip()
-        # add user.
-        place = loadPlace(username, place)
+        user.name = rl[0].rstrip()
+        placename = rl[1].rstrip()
+        user.location = loadPlace(username, placename)
 
     except:
         print("The user save you are trying to load does not exist")
 
     return user
 
+
 def savePlace(user, place):
     # place is the place object
-    # For now the attributes will be put at the start
-
-    name = "name"
-    description = "desc"
-    connections = ["one", "two", "three"]
-
+    # user is the person object
 
     s = pathlib.Path.cwd()
     b = os.path.join(s, "savefiles")
-    t = os.path.join(b, user)
-    fp = os.path.join(t, name + ".txt")
+    t = os.path.join(b, user.name)
+    fp = os.path.join(t, place.name + ".txt")
 
     check = True
 
     try:
         f = open(fp, "r")
-        # This is just in case the function messes something up
         rl = f.readlines()
         f.close()
 
-        fp2 = os.path.join(t, name + "backup.txt")
+        fp2 = os.path.join(t, place.name + "backup.txt")
         f = open(fp2, "w")
         for item in rl:
-            f.write(item + "\n")
+            f.write(item)
         f.close()
 
         print("The place file exits")
@@ -100,22 +95,20 @@ def savePlace(user, place):
         print("Creating the place file")
         check = False
 
-
     f = open(fp, "w")
-    f.write(name + ":\n")
-    f.write(description + "\n")
+    f.write(place.name + "\n")
+    f.write(place.description + "\n")
     lst = ""
-    for item in connections:
+    for item in place.connections:
         lst += item + ","
     f.write(lst + "\n")
     if check:
         print("Re-writting the place file save")
 
+
 def loadPlace(username, placename):
     # works like save but in reverse
-    # Since we have not made the place object it is a none type
-    # It will be returned later as an object
-    place = None
+    place = Place.Place()
 
     s = pathlib.Path.cwd()
     b = os.path.join(s, "savefiles")
@@ -128,16 +121,33 @@ def loadPlace(username, placename):
         f.close()
 
         # add place. to all below
-        name = rl[0].rstrip()
-        desc = rl[1].rstrip()
-        cons = rl[2].split(",")
-        cons.pop()
+        place.name = rl[0].rstrip()
+        place.description = rl[1].rstrip()
+        place.connections = rl[2].split(",")
+        place.connections.pop()
 
     except:
         print("The place file '" + placename + "' does not exist")
+        print("Opening default")
+
+        a = pathlib.Path.cwd()
+        b = os.path.join(a, "savefiles")
+        c = os.path.join(b, "basesaves")
+        fp = os.path.join(c, placename + ".txt")
+
+        try:
+            f = open(fp, "r")
+            rl = f.readlines()
+            f.close()
+
+            # add place. to all below
+            place.name = rl[0].rstrip()
+            place.description = rl[1].rstrip()
+            place.connections = rl[2].split(",")
+            place.connections.pop()
+
+        except:
+            print("The base place file '" + placename + "' does not exist. It needs to be created")
+
 
     return place
-
-
-saveUser("trial")
-loadUser("trial")
