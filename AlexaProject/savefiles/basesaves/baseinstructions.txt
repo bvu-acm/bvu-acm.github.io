@@ -1,0 +1,16 @@
+Here is where all of the base files of the places we create will go.
+As of now the layout of the file will be as follows and will be edited later
+by adding more attributes to the back of the list:
+
+Place files: (placename.txt)
+	name -> string of a name
+	description -> string of the description. NO NEWLINES
+	connectionnames -> list of connections seperated by commas.
+			   if there is just one connection still put a
+			   comma after it.
+		example: placeone,placetwo,place3 | NO SPACES OR BRACKETS
+	leave a blankline at the end of every place file for following clean
+	standards of pep8
+
+There will be no need for the blank user file since we can specify the starting
+attributes on the person object creation.

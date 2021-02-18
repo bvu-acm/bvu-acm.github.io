@@ -1,7 +1,8 @@
-import places
+import Place
+import saveload
 
 
-def command(commandString, person):
+def command(commandString, person, place):
     # command string holds the string of the given command and person is the person object that holds
     # the players info
 
@@ -13,18 +14,19 @@ def command(commandString, person):
     com1 = "go to"
     com2 = "display"
     if com1 in commandString:
-        place = commandString[len(com1) + 1:]
-        goto(place, person)
+        placename = commandString[len(com1) + 1:]
+        goto(placename, person)
     elif com2 in commandString:
         display(person.location)
 
 
-def goto(place, person):
-    if place in places.connections[person.location]:
-        person.location = place
-        display(place)
+def goto(placename, person):
+    if placename in person.location.connections:
+        saveload.saveUser(person)
+        person.location = saveload.loadPlace(person.name, placename)
+        display(person.location)
 
 
 def display(location):
-    print(places.descriptions[location])
-    print(places.connections[location])
+    print(location.description)
+    print("Exits: " + str(location.connections))
