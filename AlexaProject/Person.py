@@ -4,3 +4,6 @@ class Person:
         # Also here is where you will add inventory dictionary, health, etc
         # any player info should go here
         self.location = "name0"
+
+if __name__ == "__main__":
+    p = Person()
