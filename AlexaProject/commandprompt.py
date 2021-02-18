@@ -1,11 +1,13 @@
-import places
+import Place
+import Person
+import saveload
 
 def command(commandString, person):
     # command string holds the string of the given command and person is the person object that holds
     # the players info
 
     # For ide debugging purposes
-    # commandString = ""
+    # command = ""
     commandString = commandString.lower()
     commandStringLst = commandString.split()
 
@@ -13,33 +15,47 @@ def command(commandString, person):
     singleCommands = ["take", "eat", "drink"]
     doubleCommands = [["talk", "to"], ["attack", "with"], ["trade", "with"], ["go", "to"]]
 
-    if commandString in loneCommands:
-        if commandString == "help":
+    # Commands that take no arguments
+    if commandStringLst[0] in loneCommands:
+        if commandStringLst[0] == "help":
             displayHelp()
 
-        if commandString == "hunt":
+        if commandStringLst[0] == "hunt":
 
-        if commandString == "save":
+        if commandStringLst[0] == "save":
 
-        if commandString == "run away":
+        if commandStringLst[0] == "run away":
 
-        if commandString == "sleep":
+        if commandStringLst[0] == "sleep":
 
+    # Commands that take 1 argument
+    elif commandStringlstLst[0] in singleCommands:
+        if commandStringLst[0] == "take":
 
-    elif commandStringlst[0] in singleCommands:
+        if commandStringLst[0] == "eat":
 
-    elif commandStringlst[:1] in doubleCommands:
-        
+        if commandStringLst[0] == "drink":
+
+    # Commands that take one argument and have two prior command words
+    elif commandStringLst[:1] in doubleCommands:
+        if commandStringLst[:1] == ["talk", "to"]:
+
+        if commandStringLst[:1] == ["attack", "with"]:
+
+        if commandStringLst[:1] == ["trade", "with"]:
+
+        if commandStringLst[:1] == ["go", "to"]:
+            goto(commandStringLst[2], person)
+
+    # Catch for if the user enters a bad command
     else:
         print("That is not a valid command.")
         print('If you need help, type "help"')
-
 
 def goto(place, person):
     if place in places.connections[person.location]:
         person.location = place
         display(place)
-
 
 def display(location):
     print(places.descriptions[location])
