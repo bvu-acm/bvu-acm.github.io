@@ -10,6 +10,6 @@ while True:
     if inp == "exit":
         break
     else:
-        command(inp, person)
+        command(inp, person, person.location)
 
 print("Goodbye")

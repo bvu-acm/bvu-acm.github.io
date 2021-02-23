@@ -1,0 +1,3 @@
+area3
+This is the third area of the game and a dead end. Go back to the beginning
+start,

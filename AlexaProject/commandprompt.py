@@ -2,7 +2,7 @@ import Place
 import Person
 import saveload
 
-def command(commandString, person):
+def command(commandString, person, place):
     # command string holds the string of the given command and person is the person object that holds
     # the players info
 
@@ -52,14 +52,15 @@ def command(commandString, person):
         print("That is not a valid command.")
         print('If you need help, type "help"')
 
-def goto(place, person):
-    if place in places.connections[person.location]:
-        person.location = place
-        display(place)
+def goto(placename, person):
+    if placename in person.location.connections:
+        saveload.saveUser(person)
+        person.location = saveload.loadPlace(person.name, placename)
+        display(person.location)
 
 def display(location):
-    print(places.descriptions[location])
-    print(places.connections[location])
+    print(location.description)
+    print("Exits: " + str(location.connections))
 
 def displayHelp():
     print("The available commands are:")

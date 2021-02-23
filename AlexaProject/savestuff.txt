@@ -1,0 +1,8 @@
+first startfile that will hold all of the information for the start location
+    it will also hold some functionality to give other locations random items, npcs, etc based on
+    what we want
+
+from that point forward, every place that we make will also be a file based system.
+
+everytime you leave an area you rewrite the base file.
+everytime you enter load the base file or a previosly made file
