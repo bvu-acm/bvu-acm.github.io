@@ -5,4 +5,4 @@ class Item():
         self.name = name #type: str
         self.item_type = item_type #type: str
         self.traits = traits
-        slef.description = description #type: str
+        self.description = description #type: str
