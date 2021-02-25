@@ -2,68 +2,90 @@ import Place
 import Person
 import saveload
 
-def command(commandString, person, place):
-    # command string holds the string of the given command and person is the person object that holds
-    # the players info
+class commandLine(object):
 
-    # For ide debugging purposes
-    # command = ""
-    commandString = commandString.lower()
-    commandStringLst = commandString.split()
+    # Just a dummy init
+    def __init__(self):
+        self.commandLine = 0
 
-    loneCommands = ["help", "hunt", "save", "run away", "sleep"]
-    singleCommands = ["take", "eat", "drink"]
-    doubleCommands = [["talk", "to"], ["attack", "with"], ["trade", "with"], ["go", "to"]]
+    def displayHelp(self):
+        print("The available commands are:")
+        print("\tsave\n\thelp\n\ttake <item>\n\teat <item>")
+        print("\tdrink <item>\n\ttalk to <person>\n\tattack with <weapon>")
+        print("\tgo to <place>")
 
-    # Commands that take no arguments
-    if commandStringLst[0] in loneCommands:
-        if commandStringLst[0] == "help":
-            displayHelp()
+    def save(self, place, person):
+        #TODO
 
-        if commandStringLst[0] == "hunt":
+    def take(self, item, place, person):
+        #TODO
 
-        if commandStringLst[0] == "save":
+    def eat(self, item, place, person):
+        #TODO
 
-        if commandStringLst[0] == "run away":
+    def drink(self, item, place, person):
+        #TODO
 
-        if commandStringLst[0] == "sleep":
+    def talkTo(self, npc, place, person):
+        #TODO
 
-    # Commands that take 1 argument
-    elif commandStringlstLst[0] in singleCommands:
-        if commandStringLst[0] == "take":
+    def attackWith(self, weapon, place, person):
+        #TODO
 
-        if commandStringLst[0] == "eat":
+    def goTo(self, placename, person):
+        if placename in person.location.connections:
+            saveload.saveUser(person)
+            person.location = saveload.loadPlace(person.name, placename)
+            display(person.location)
 
-        if commandStringLst[0] == "drink":
+    def display(self, location):
+        print(location.description)
+        print("Exits: " + str(location.connections))
 
-    # Commands that take one argument and have two prior command words
-    elif commandStringLst[:1] in doubleCommands:
-        if commandStringLst[:1] == ["talk", "to"]:
+    def processCommand(self, commandString, person, place):
+        # command string holds the string of the given command and person is the person object that holds
+        # the players info
+        commandString = commandString.lower()
+        commandStringLst = commandString.split()
+        if len(commandStringLst) > 3:
+            print("Too many arguments. We are displaying the help for you. Try again please.")
+            self.displayHelp()
+            return 
+        loneCommands = ["help", "save"]
+        singleCommands = ["take", "eat", "drink"]
+        doubleCommands = [["talk", "to"], ["attack", "with"], ["go", "to"]]
 
-        if commandStringLst[:1] == ["attack", "with"]:
+        # Commands that take no arguments
+        if commandStringLst[0] in loneCommands and len(commandStringLst) == 1:
+            if commandStringLst[0] == "help":
+                self.displayHelp()
 
-        if commandStringLst[:1] == ["trade", "with"]:
+            elif commandStringLst[0] == "save":
+                self.save(place, person)
 
-        if commandStringLst[:1] == ["go", "to"]:
-            goto(commandStringLst[2], person)
+        # Commands that take 1 argument
+        elif commandStringlstLst[0] in singleCommands and len(commandStringLst) == 2:
+            if commandStringLst[0] == "take":
+                self.take(commandStringLst[2], place, person)
 
-    # Catch for if the user enters a bad command
-    else:
-        print("That is not a valid command.")
-        print('If you need help, type "help"')
+            elif commandStringLst[0] == "eat":
+                self.eat(commandStringLst[2], place, person)
 
-def goto(placename, person):
-    if placename in person.location.connections:
-        saveload.saveUser(person)
-        person.location = saveload.loadPlace(person.name, placename)
-        display(person.location)
+            elif commandStringLst[0] == "drink":
+                self.drink(commandStringLst[2], place, person)
 
-def display(location):
-    print(location.description)
-    print("Exits: " + str(location.connections))
+        # Commands that take one argument and have two prior command words
+        elif commandStringLst[:1] in doubleCommands and len(commandStringLst) == 3:
+            if commandStringLst[:1] == ["talk", "to"]:
+                self.talkTo(commandStringLst[2], place, person)
 
-def displayHelp():
-    print("The available commands are:")
-    print("\thunt\n\tsave\n\trun away\n\tsleep\n\ttake 'item'\n\teat 'item'")
-    print("\tdrink 'item'\n\ttalk to 'person'\n\tattack with 'weapon'")
-    print("\ttrade with 'person'\n\tgo to 'place'")
+            elif commandStringLst[:1] == ["attack", "with"]:
+                self.attackWith(commandStringLst[2], place, person)
+
+            elif commandStringLst[:1] == ["go", "to"]:
+                self.goTo(commandStringLst[2], person)
+
+        # Catch for if the user enters a bad command
+        else:
+            print("That is not a valid command.")
+            print('If you need help, type "help"')
