@@ -1,10 +1,10 @@
-# import weopon
+# import weapons
 # import food
 # etc
 
 def createItem(name):
 
-    weopons = ["sword"]
+    weapons  = ["sword"]
     food = ["apple"]
 
     # if name in weopons:
