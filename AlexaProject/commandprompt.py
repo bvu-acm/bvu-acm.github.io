@@ -32,10 +32,16 @@ class commandLine(object):
     def attackWith(self, weapon, place, person):
         #TODO
 
-    def goTo(self, placename, person):
-        if placename in person.location.connections:
+
+    def goTo(self, placenum, person):
+        #TODO
+        # We have talked and now will change the goTo function to take 
+        # a number as an argument instead of a place name
+        # we found this would be easier for the alexa to interpret
+
+        if placenum in person.location.connections:
             saveload.saveUser(person)
-            person.location = saveload.loadPlace(person.name, placename)
+            person.location = saveload.loadPlace(person.name, placenum)
             display(person.location)
 
     def display(self, location):
