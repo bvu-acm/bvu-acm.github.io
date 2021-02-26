@@ -1,10 +1,10 @@
-from AlexaProject.region1.region1place import region1Place
+from AlexaProject.Place import Place
 
 
-class placeName(region1Place):
-    def __init__(self):
+class placeName(Place):
+    def __init__(self, person):
         # This grabs all of the methods and functions from the parent class place
-        super().__init__()
+        super().__init__(person)
 
         # Here is where you would change the variables to match you specifications
         self.name = "placeName"

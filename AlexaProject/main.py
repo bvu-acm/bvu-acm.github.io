@@ -1,8 +1,6 @@
-# from commandprompt import *
 import Person
 # This will hopefully not be needed later
 from AlexaProject.region1.parkinglot import parkingLot
-from AlexaProject.region1.mainimportr1 import mainImportR1
 
 person = Person.Person()
 # This is added for me to start in region one. It will be changed to the default location when we are done

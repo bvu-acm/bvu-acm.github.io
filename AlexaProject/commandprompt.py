@@ -1,7 +1,3 @@
-import Place
-import Person
-from AlexaProject.mainimport import mainImport
-
 class commandLine(object):
 
     # Just a dummy init
@@ -50,6 +46,7 @@ class commandLine(object):
 
         if placenum - 1 < len(person.location.connections):
             person.location = self.mi.getLocation(person.location.connections[placenum - 1])
+            person.comline = person.location.comline
             self.display(person.location)
 
     def display(self, location):

@@ -1,11 +1,5 @@
 from AlexaProject.mainimport import mainImport
 
-# from AlexaProject.region1.leftside import leftSide
-# from AlexaProject.region1.rightside import rightSide
-# from AlexaProject.region1.frontgate import frontGate
-# from AlexaProject.region1.backside import backSide
-# from AlexaProject.region1.parkinglot import parkingLot
-
 
 class mainImportR1(mainImport):
 

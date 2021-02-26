@@ -1,7 +1,7 @@
-from AlexaProject.region1.region1place import region1Place
+from AlexaProject.Place import Place
 
 
-class leftSide(region1Place):
+class leftSide(Place):
     def __init__(self, person):
         # This grabs all of the methods and functions from the parent class place
         super().__init__(person)
