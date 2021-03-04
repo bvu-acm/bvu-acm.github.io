@@ -1,6 +1,9 @@
 import Place
-import saveload
-from Item import *
+# import saveload
+
+# I took this one out for now until we get the item files made
+# from Item import *
+from AlexaProject.commandprompt import commandLine
 
 '''
 
@@ -20,6 +23,8 @@ class Person:
         self.location = "name0"
         self.hp = 25
         self.inventory = []
+        self.comline = commandLine()
+
 
 
 if __name__ == "__main__":
