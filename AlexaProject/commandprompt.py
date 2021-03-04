@@ -7,6 +7,20 @@ class commandLine(object):
         # This is used to keep track of all of the location imports. None by default for now change based on region
         self.mi = None
 
+    # This function is for fast acess to areas of your region. Should be removed when we get done
+    def jumpTo(self, person, place):
+        place = place.replace("-", " ")
+        nextloc = self.mi.getLocation(place)
+        if nextloc:
+            person.location = nextloc
+            person.comline = person.location.comline
+            self.display(person.location)
+        else:
+            print("%s has not been implemented yet" % place,
+                  "\n1. The file itself doesn't exist yet or"
+                  "\n2. The instantiation has not been added to the main import file or"
+                  "\n3. The main import file for your region has not been made yet, refer to region1 for examples")
+
     def displayHelp(self):
         print("The available commands are:")
         print("\tsave\n\thelp\n\ttake <item>\n\teat <item>")
@@ -29,9 +43,16 @@ class commandLine(object):
         print("Not implemented yet.")
         #TODO
 
-    def talkTo(self, npc, place, person):
-        print("Not implemented yet.")
-        #TODO
+    def talkTo(self, npcnum, place, person):
+        if npcnum - 1 < len(place.npcs):
+            npc = self.mi.getNpc(place.npcs[npcnum - 1])
+            if not npc:
+                print("This person has not been implemented yet"
+                      "\n1. The file itself doesn't exist yet or"
+                      "\n2. The instantiation has not been added to the main import file or"
+                      "\n3. The main import file for your region has not been made yet, refer to region1 for examples")
+        else:
+            print("That number is out of the bounds of the input. Try again")
 
     def attackWith(self, weapon, place, person):
         print("Not implemented yet.")
@@ -45,9 +66,18 @@ class commandLine(object):
         # we found this would be easier for the alexa to interpret
 
         if placenum - 1 < len(person.location.connections):
-            person.location = self.mi.getLocation(person.location.connections[placenum - 1])
-            person.comline = person.location.comline
-            self.display(person.location)
+            nextloc = self.mi.getLocation(person.location.connections[placenum - 1])
+            if nextloc:
+                person.location = nextloc
+                person.comline = person.location.comline
+                self.display(person.location)
+            else:
+                print("This area has not been implemented yet"
+                      "\n1. The file itself doesn't exist yet or"
+                      "\n2. The instantiation has not been added to the main import file or"
+                      "\n3. The main import file for your region has not been made yet, refer to region1 for examples")
+        else:
+            print("That is not a valid location. Try again")
 
     def display(self, location):
         # Location is a Place object
@@ -77,7 +107,7 @@ class commandLine(object):
         if len(location.npcs) != 0:
             print("NPCs: ", end="")
             for i in range(len(location.npcs)):
-                npc = location.items[i]
+                npc = location.npcs[i]
                 if i < len(location.npcs) - 1:
                     # Might need to change this to just the number if Alexa reads it funny
                     print("[%d] " % (i + 1) + npc, end=", ")
@@ -85,7 +115,7 @@ class commandLine(object):
                     print("[%d] " % (i + 1) + npc)
         print()
 
-    def extraCommand(self, comstrlst):
+    def extraCommand(self, comstrlst, person, place):
         # Here is where we would add extra functionality if we needed to
         return False
 
@@ -105,9 +135,9 @@ class commandLine(object):
 
         loneCommands = ["help", "save", "display"]
         singleCommands = ["take", "eat", "drink"]
-        doubleCommands = [["talk", "to"], ["attack", "with"], ["go", "to"]]
+        doubleCommands = [["talk", "to"], ["attack", "with"], ["go", "to"], ["jump", "to"]]
 
-        if self.extraCommand(commandStringLst):
+        if self.extraCommand(commandStringLst, person, place):
             pass
         else:
             # Commands that take no arguments
@@ -135,13 +165,16 @@ class commandLine(object):
             # Commands that take one argument and have two prior command words
             elif commandStringLst[:2] in doubleCommands and len(commandStringLst) == 3:
                 if commandStringLst[:2] == ["talk", "to"]:
-                    self.talkTo(commandStringLst[2], place, person)
+                    self.talkTo(int(commandStringLst[2]), place, person)
 
                 elif commandStringLst[:2] == ["attack", "with"]:
                     self.attackWith(commandStringLst[2], place, person)
 
                 elif commandStringLst[:2] == ["go", "to"]:
                     self.goTo(int(commandStringLst[2]), person)
+
+                elif commandStringLst[:2] == ["jump", "to"]:
+                    self.jumpTo(person, commandStringLst[2])
             # Catch for if the user enters a bad command
             else:
                 print("That is not a valid command.")

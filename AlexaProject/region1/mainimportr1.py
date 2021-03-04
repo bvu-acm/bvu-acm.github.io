@@ -26,3 +26,12 @@ class mainImportR1(mainImport):
         elif name == "parking lot":
             from AlexaProject.region1.parkinglot import parkingLot
             return parkingLot(self.person)
+        elif name == "main entrance":
+            from AlexaProject.region1.mainentrance import mainentrance
+            return mainentrance(self.person)
+
+    def createNpc(self, name):
+
+        if name == "robot secretary":
+            from AlexaProject.region1.robotsec import robotSecretary
+            return robotSecretary(self.person)
