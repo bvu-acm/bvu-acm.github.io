@@ -7,12 +7,16 @@ class FGCL(commandLine):
         self.commandLine = 1
         self.mi = m
 
-    def extraCommand(self, comstrlst):
+    def extraCommand(self, comstrlst, person, place):
         if comstrlst == ["speak", "friend"]:
-            self.speak()
+            self.speak(place)
             return True
         return False
 
-    def speak(self):
-        print("You speak the word friend and the gate opens!!"
-              "\njust kidding I haven't implemented that yet :)")
+    def speak(self, place):
+        if "main entrance" not in place.connections:
+            print("You speak the word friend and the gate opens!")
+            place.connections.append("main entrance")
+            self.display(place)
+        else:
+            print("The door is already open")
