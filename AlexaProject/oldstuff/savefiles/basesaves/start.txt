@@ -1,0 +1,3 @@
+start
+This is the starting area of the game. Not much to see here at the moment
+area2,area3,area4
